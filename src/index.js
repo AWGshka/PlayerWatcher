@@ -1,6 +1,6 @@
 import { fetchPlayers, updateStatuses } from "./utils.js";
 
-const toFetch = [797691185, 1159754487, 961752903, 1003651805, 507365394];
+const toFetch = [961752903, 1003651805, 507365394, 870301508, 818711896, 930568674, 1012403585, 900253841];
 
 console.clear();
 console.log("[PlayerWatcher] Fetching players...");
