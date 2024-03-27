@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { EmbedBuilder, WebhookClient } from "discord.js";
 
 const fetchedPlayers = [];
