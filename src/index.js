@@ -1,5 +1,6 @@
 import { fetchPlayers, updateStatuses } from "./utils.js";
 
+process.env.serverID = 14876729;
 const toFetch = [
   961752903, // INDIA
   1003651805, // jibbz
