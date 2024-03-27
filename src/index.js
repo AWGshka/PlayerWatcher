@@ -8,8 +8,6 @@ const toFetch = [
   1156080350, // Warrior
   978249235, // Don Vito
 ];
-process.env.serverID = 14876729;
-process.env.webhookUrl = "https://discord.com/api/webhooks/1222459794200461343/Az7usBXF8lSN_AqBz84JM3y0bsVhyDFPaHnctc5urPKBlAFE_aCI5KPBjb_k99cjjjWJ";
 
 console.clear();
 console.log("[PlayerWatcher] Fetching players...");
