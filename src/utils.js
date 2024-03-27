@@ -1,11 +1,6 @@
 import { EmbedBuilder, WebhookClient } from "discord.js";
 
 const fetchedPlayers = [];
-
-setTimeout(() => {
-  fetchedPlayers[0].status = !fetchedPlayers[0].status;
-}, 10000);
-
 const fetchPlayers = async (...playerIDs) => {
   const promises = playerIDs.map(async (playerID) => {
     const apiPlayerUrl = `https://api.battlemetrics.com/players/${playerID}?filter[servers]=${process.env.serverID}&include=server&fields[player]=name&fields[server]=name`;
@@ -46,7 +41,6 @@ const updateStatuses = async (force = false) => {
 };
 
 let messageId;
-
 const sendWebhook = async (title, message, lastUpdate) => {
   const avatar = "https://i.imgur.com/YhmstPJ.png";
   const webhookClient = new WebhookClient({
@@ -62,7 +56,6 @@ const sendWebhook = async (title, message, lastUpdate) => {
     await webhookClient.editMessage(messageId, content).catch(() => (messageId = null));
     await webhookClient.send("@here").then((message) => webhookClient.deleteMessage(message.id));
   }
-
   if (!messageId) await webhookClient.send(content).then((message) => (messageId = message.id));
 };
 
