@@ -14,14 +14,14 @@ const fetchPlayers = async (...playerIDs) => {
   await Promise.all(promises);
 };
 
-const updateStatuses = async (force = false) => {
+const updateStatuses = async (forceWebhook = false) => {
   const apiServerUrl = `https://api.battlemetrics.com/servers/${process.env.serverID}?include=player&fields[player]=name`;
   const server = await fetch(apiServerUrl).then((res) => res.json());
   const serverName = server.data.attributes.name;
   const allPlayers = server.included;
 
   let lastUpdate;
-  let shouldSendWebhook = force;
+  let shouldSendWebhook = forceWebhook;
   fetchedPlayers.forEach((player) => {
     const isOnServer = allPlayers.some((p) => p.id === player.id);
     if (player.status !== isOnServer) {
@@ -43,9 +43,7 @@ const updateStatuses = async (force = false) => {
 let messageId;
 const sendWebhook = async (title, message, lastUpdate) => {
   const avatar = "https://i.imgur.com/YhmstPJ.png";
-  const webhookClient = new WebhookClient({
-    url: "https://discord.com/api/webhooks/1222459794200461343/Az7usBXF8lSN_AqBz84JM3y0bsVhyDFPaHnctc5urPKBlAFE_aCI5KPBjb_k99cjjjWJ",
-  });
+  const webhookClient = new WebhookClient({ url: process.env.webhookUrl });
 
   const embed = new EmbedBuilder().setTitle(title).setColor(0xffffff).setDescription(message).setTimestamp(Date.now());
   if (lastUpdate) embed.setFooter({ text: lastUpdate, iconURL: avatar });
