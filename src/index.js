@@ -1,15 +1,9 @@
-import { fetchPlayers, updateStatuses } from "./utils.js";
+import { checkConfig, fetchPlayers, updateStatuses } from "./utils.js";
 
-const toFetch = [
-  961752903, // INDIA
-  1003651805, // jibbz
-  1012403585, // Teen
-  1147610213, // KIWi
-  1156080350, // Warrior
-  978249235, // Don Vito
-];
+const toFetch = [];
 
 console.clear();
+checkConfig();
 console.log("[PlayerWatcher] Fetching players...");
 await fetchPlayers(...toFetch);
 await updateStatuses(true);
