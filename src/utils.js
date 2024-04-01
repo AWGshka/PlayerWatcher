@@ -1,6 +1,13 @@
 import "dotenv/config";
 import { EmbedBuilder, WebhookClient } from "discord.js";
 
+const checkConfig = () => {
+  if (process.env.serverID == 0 || !process.env.webhookUrl.startsWith("https://discord.com/api/webhooks/")) {
+    console.log("[PlayerWatcher] Invalid settings. Please see README.md for reference.");
+    process.exit();
+  }
+};
+
 const fetchedPlayers = [];
 const fetchPlayers = async (...playerIDs) => {
   const promises = playerIDs.map(async (playerID) => {
@@ -58,4 +65,4 @@ const sendWebhook = async (title, message, lastUpdate) => {
   if (!messageId) await webhookClient.send(content).then((message) => (messageId = message.id));
 };
 
-export { fetchPlayers, updateStatuses, sendWebhook };
+export { checkConfig, fetchPlayers, updateStatuses };
